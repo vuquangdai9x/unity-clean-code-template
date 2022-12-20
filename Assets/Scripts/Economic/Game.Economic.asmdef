@@ -1,0 +1,17 @@
+{
+    "name": "Game.Economic",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4fc58fba7ae57464593d08428c24dcbf",
+        "GUID:1852930936314f143af62d65e7fcce68"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
