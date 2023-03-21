@@ -1,0 +1,3 @@
+# Concept
+All the static design (config level for an enemy, item effect stats,...) can be store by ScriptableObject and references by other gameplay script.
+This allow separate design from execution script, allow ease to develop design tool, like import/export for spreadsheet...

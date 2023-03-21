@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.DesignPattern
 {
+    /// <summary>
+    /// This singleton need pre instantiated object in scene
+    /// </summary>
     public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;

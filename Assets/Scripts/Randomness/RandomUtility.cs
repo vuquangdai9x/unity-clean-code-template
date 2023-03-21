@@ -8,17 +8,17 @@ namespace Game.Randomness
         #region Primitive random
         public static int GetRandomInt => UnityEngine.Random.Range(int.MinValue, int.MaxValue);
 
-        public static int GetInt(int data, int seed)
+        public static int GetInt(int seed, int data = 0)
         {
             return (int)Klak.Math.XXHash.GetHash(data, seed);
         }
 
-        public static bool GetRandomBool(int data, int seed)
+        public static bool GetRandomBool(int seed, int data = 0)
         {
             return GetInt(data, seed) % 2 == 0;
         }
 
-        public static float GetValue01(int data, int seed)
+        public static float GetValue01(int seed, int data = 0)
         {
             return Klak.Math.XXHash.GetValue01(data, seed);
         }
@@ -32,12 +32,12 @@ namespace Game.Randomness
             return UnityEngine.Random.Range(min, max);
         }
 
-        public static int GetRange(int min, int max, int data, int seed)
+        public static int GetRange(int min, int max, int seed, int data = 0)
         {
             return Klak.Math.XXHash.GetRange(data, min, max, seed);
         }
 
-        public static float GetRange(float min, float max, int data, int seed)
+        public static float GetRange(float min, float max, int seed, int data = 0)
         {
             return Klak.Math.XXHash.GetRange(data, min, max, seed);
         }
@@ -62,7 +62,7 @@ namespace Game.Randomness
             return -1;
         }
 
-        public static int GetWeightedRandomIndex(int[] weights, int data, int seed)
+        public static int GetWeightedRandomIndex(int[] weights, int seed, int data = 0)
         {
             float sumWeight = 0;
             for (int i = 0; i < weights.Length; i++) sumWeight += weights[i];
@@ -80,7 +80,7 @@ namespace Game.Randomness
             return -1;
         }
 
-        public static int[] GetWeightedRandomListIndexs(int amount, int[] weights, int data, int seed)
+        public static int[] GetWeightedRandomListIndexs(int amount, int[] weights, int seed, int data = 0)
         {
             float sumWeight = 0;
             for (int i = 0; i < weights.Length; i++) sumWeight += weights[i];
@@ -123,7 +123,7 @@ namespace Game.Randomness
             return -1;
         }
 
-        public static int GetWeightedRandomIndex(float[] weights, int data, int seed)
+        public static int GetWeightedRandomIndex(float[] weights, int seed, int data = 0)
         {
             float sumWeight = 0;
             for (int i = 0; i < weights.Length; i++) sumWeight += weights[i];
@@ -141,7 +141,7 @@ namespace Game.Randomness
             return -1;
         }
 
-        public static int[] GetWeightedRandomListIndexs(int amount, float[] weights, int data, int seed)
+        public static int[] GetWeightedRandomListIndexs(int amount, float[] weights, int seed, int data = 0)
         {
             float sumWeight = 0;
             for (int i = 0; i < weights.Length; i++) sumWeight += weights[i];
@@ -166,7 +166,7 @@ namespace Game.Randomness
             return result;
         }
 
-        public static int[] GetShuffledIndexArray(int length, int data, int seed)
+        public static int[] GetShuffledIndexArray(int length, int seed, int data = 0)
         {
             // shuffer indexs - O(n)
             int[] indexArray = new int[length];
