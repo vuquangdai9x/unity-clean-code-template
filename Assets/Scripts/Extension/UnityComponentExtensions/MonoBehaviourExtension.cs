@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Game.Extension
+namespace DaiVQScript.Utilities
 {
-    public static class CoroutineExtension
+    public static class MonoBehaviourExtension
     {
         public static Coroutine WaitOneFrame(this MonoBehaviour monoBehaviour, System.Action action)
         {
@@ -12,6 +12,19 @@ namespace Game.Extension
         private static IEnumerator DelayOneFrame(System.Action action)
         {
             yield return new WaitForEndOfFrame();
+            action?.Invoke();
+        }
+
+        public static Coroutine WaitFrames(this MonoBehaviour monoBehaviour, System.Action action, int numFrames)
+        {
+            return monoBehaviour.StartCoroutine(DelayFrames(action, numFrames));
+        }
+        private static IEnumerator DelayFrames(System.Action action, int numFrames)
+        {
+            for (int i = 0; i < numFrames; i++)
+            {
+                yield return null;
+            }
             action?.Invoke();
         }
 
@@ -51,6 +64,14 @@ namespace Game.Extension
         {
             yield return new WaitUntil(predicate);
             action?.Invoke();
+        }
+
+        public static Coroutine PlayAnimAndWait(this MonoBehaviour monoBehaviour, DaiVQScript.AIUnit.Animation.SpineAnimManager animManager, AIUnit.Animation.AnimAssetGroupConfig anim, float baseDuration, float speedScale, System.Action onFinished, SoundFxToPlay sfx = null)
+        {
+            anim.timeScale = speedScale;
+            animManager.PlayAnimGroup(anim);
+            sfx?.PlaySound();
+            return monoBehaviour.StartCoroutine(DelayToDo(onFinished, baseDuration / speedScale));
         }
 
         public static Coroutine QuickStopTime(this MonoBehaviour monoBehaviour, float durationRealtime)

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.Extension
+namespace DaiVQScript.Utilities
 {
     public static class ArrayExtension
     {
@@ -18,27 +19,9 @@ namespace Game.Extension
             return array;
         }
 
-        public static T[] Shuffle<T>(this T[] array, int seed, int data = 0)
-        {
-            int n = array.Length;
-            for (int i = 0; i < n; i++)
-            {
-                int r = i + Randomness.RandomUtility.GetRange(0, n - i, seed, data);
-                T t = array[r];
-                array[r] = array[i];
-                array[i] = t;
-            }
-            return array;
-        }
-
         public static T GetRandomElement<T>(this T[] array)
         {
             return array[UnityEngine.Random.Range(0, array.Length)];
-        }
-
-        public static T GetRandomElement<T>(this T[] array, int seed, int data = 0)
-        {
-            return array[Randomness.RandomUtility.GetRange(0, array.Length, seed, data)];
         }
 
         /// <summary>
@@ -54,5 +37,15 @@ namespace Game.Extension
         }
 
         public static T GetElementClamp<T>(this T[] array, int index) => array[Mathf.Clamp(index, 0, array.Length - 1)];
+
+        /// <summary>
+        /// Quick remove an element from list, by swap index with the last element.
+        /// Use with !!CAUTION!! because it modify the last element and the element at index of list.
+        /// </summary>
+        public static void RemoveBySwapBack<T>(this List<T> list, int index)
+        {
+            list[index] = list[list.Count - 1];
+            list.RemoveAt(list.Count - 1);
+        }
     }
 }
